@@ -549,12 +549,9 @@ Installation of Gateway API CRDs
     ```
     
 
-<aside>
-💡
-
-NOTE:  All the configs are already availbale in their respective directories, We can use them or copy from this guide and configure on your own.
-
-</aside>
+> [!NOTE]
+>
+>All the configs are already availbale in their respective directories, We can use them or copy from this guide and configure on your own.
 
 Create a gateway class:
 
@@ -1070,7 +1067,7 @@ Inside the `workflows` create two config file.
 
 
 > [!NOTE]
->These files are already available in the github >repo. You just need to modify them and use them >as per your need.
+>These files are already available in the github repo. You just need to modify them and use them as per your need.
 
 
 **`microservice-ci.yaml`**
@@ -1703,7 +1700,7 @@ Go to [https://api.slack.com/apps](https://api.slack.com/apps) again.
 
 From scartch
 
-![image.png](docs/imagesimage%2012.png)
+![image.png](docs/images/image%2012.png)
 
 Give name and choose the workspace and create.
 
