@@ -98,12 +98,15 @@ elasticsearchRef:
 daemonSet:
   podTemplate:
     spec:
-      securityContext:
-        runAsUser: 0
       serviceAccount: elastic-beat-filebeat
       automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
       containers:
         - name: filebeat
+          securityContext:
+            runAsUser: 0
           env:
           - name: NODE_NAME
             valueFrom:
@@ -145,8 +148,20 @@ config:
             enabled: true
             default_config:
               type: filestream
+              id: kubernetes-container-logs-${data.kubernetes.pod.name}-${data.kubernetes.container.id}
               paths:
               - /var/log/containers/*${data.kubernetes.container.id}.log
+              parsers:
+              - container: {}
+              prospector:
+                scanner:
+                  fingerprint.enabled: true
+                  symlinks: true
+              file_identity.fingerprint: {}
+  processors:
+   - add_cloud_metadata: {}
+   - add_host_metadata: {}
+
 
 # Reference a configuration in a Secret.
 # ref: https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-beat-configuration.html#k8s-beat-custom-configuration
@@ -218,4 +233,17 @@ clusterRole:
     - get
     - watch
     - list
-
+  - apiGroups: ["apps"]
+    resources:
+    - replicasets
+    verbs:
+    - get
+    - list
+    - watch
+  - apiGroups: ["batch"]
+    resources:
+    - jobs
+    verbs:
+    - get
+    - list
+    - watch
