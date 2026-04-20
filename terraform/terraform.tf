@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "ap-south-1"
 }
 
 terraform {
@@ -17,4 +17,3 @@ terraform {
     key    = "s3-backend"
     region = "ap-south-1"
   }
-}
