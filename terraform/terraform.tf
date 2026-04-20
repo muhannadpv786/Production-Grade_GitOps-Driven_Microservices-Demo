@@ -13,7 +13,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "devopsdock-terraform-backend-bucket"
+    bucket = "muhannad-terraform-backend-bucket"
     key    = "s3-backend"
     region = "ap-south-1"
   }
